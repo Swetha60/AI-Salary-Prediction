@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Salary Predictor</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 750px;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #172554;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #334155;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #2563eb;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .info {
+            margin-top: 25px;
+            padding: 15px;
+            background: #eff6ff;
+            border-radius: 8px;
+            color: #1e3a8a;
+            font-size: 14px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+
+            <h1>AI Salary Predictor</h1>
+
+            <p>
+                Predict an estimated annual salary using
+                job role, skills, experience and location.
+            </p>
+
+        </div>
+
+
+        <form action="/predict" method="POST">
+
+
+            <!-- JOB ROLE -->
+
+            <div class="form-group">
+
+    <label for="job_role">
+        Job Role
+    </label>
+
+    <input
+        type="text"
+        id="job_search"
+        placeholder="Search job role..."
+        autocomplete="off"
+    >
+
+    <select
+        name="job_role"
+        id="job_role"
+        required
+        size="5"
+        style="margin-top: 8px;"
+    >
+
+        {% for role in job_roles %}
+
+        <option value="{{ role }}">
+            {{ role }}
+        </option>
+
+        {% endfor %}
+
+    </select>
+
+</div>
+
+
+            <!-- EXPERIENCE -->
+
+            <div class="form-group">
+
+                <label for="experience">
+                    Years of Experience
+                </label>
+
+                <input
+                    type="number"
+                    name="experience"
+                    id="experience"
+                    min="0"
+                    max="30"
+                    step="0.5"
+                    placeholder="Example: 3.5"
+                    required
+                >
+
+            </div>
+
+
+            <!-- LOCATION -->
+
+            <div class="form-group">
+
+    <label for="location">
+        Location
+    </label>
+
+    <input
+        type="text"
+        id="location_search"
+        placeholder="Search location..."
+        autocomplete="off"
+    >
+
+    <select
+        name="location"
+        id="location"
+        required
+        size="5"
+        style="margin-top: 8px;"
+    >
+
+        {% for location in locations %}
+
+        <option value="{{ location }}">
+            {{ location }}
+        </option>
+
+        {% endfor %}
+
+    </select>
+
+</div>
+
+
+            <!-- SKILLS -->
+
+            <div class="form-group">
+
+    <label for="skills">
+        Skills
+    </label>
+
+    <div class="form-group">
+
+    <label for="skills">
+        Skills
+    </label>
+
+    <input
+        type="text"
+        name="skills"
+        id="skills"
+        placeholder="Example: Python, SQL, Machine Learning"
+        required
+    >
+
+    <small>
+        Enter multiple skills separated by commas.
+    </small>
+
+</div>
+
+    <p style="
+        margin-top: 8px;
+        font-size: 13px;
+        color: #64748b;
+    ">
+        You can type your skills manually.
+    </p>
+
+</div>
+
+
+            <!-- BUTTON -->
+
+            <button type="submit">
+                Predict Salary
+            </button>
+
+
+        </form>
+
+
+        <div class="info">
+
+            <strong>How it works:</strong>
+
+            The machine learning model analyzes the
+            selected job role, skills, experience and
+            location to estimate the expected salary.
+
+        </div>
+
+    </div>
+<script>
+
+    const jobSearch = document.getElementById("job_search");
+
+    const jobSelect = document.getElementById("job_role");
+
+
+    jobSearch.addEventListener("input", function () {
+
+        const searchText = this.value.toLowerCase();
+
+
+        for (let option of jobSelect.options) {
+
+            const jobName = option.text.toLowerCase();
+
+
+            if (jobName.includes(searchText)) {
+
+                option.style.display = "";
+
+            } else {
+
+                option.style.display = "none";
+
+            }
+
+        }
+
+    });
+
+
+    jobSelect.addEventListener("change", function () {
+
+        jobSearch.value = this.value;
+
+    });
+        const locationSearch =
+        document.getElementById("location_search");
+
+    const locationSelect =
+        document.getElementById("location");
+
+
+    locationSearch.addEventListener("input", function () {
+
+        const searchText =
+            this.value.toLowerCase();
+
+
+        for (let option of locationSelect.options) {
+
+            const locationName =
+                option.text.toLowerCase();
+
+
+            if (locationName.includes(searchText)) {
+
+                option.style.display = "";
+
+            } else {
+
+                option.style.display = "none";
+
+            }
+
+        }
+
+    });
+
+
+    locationSelect.addEventListener("change", function () {
+
+        locationSearch.value = this.value;
+
+    });
+
+</script>
+
+</body>
+
+</html>

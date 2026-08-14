@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Salary Prediction Result</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            margin-bottom: 8px;
+        }
+
+        .salary {
+            text-align: center;
+            background: #eef6ff;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+        }
+
+        .salary h2 {
+            margin: 0;
+            font-size: 40px;
+        }
+
+        .salary p {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .range {
+            text-align: center;
+            font-size: 17px;
+            margin-top: 15px;
+        }
+
+        .details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .detail {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 12px;
+        }
+
+        .detail strong {
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+        .salary h2 {
+    font-size: 45px;
+    margin: 10px 0;
+}
+
+.salary > p:first-child {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.range {
+    margin-top: 20px;
+    line-height: 1.8;
+}
+
+.detail small {
+    color: #666;
+}
+
+        @media (max-width: 600px) {
+
+            .details {
+                grid-template-columns: 1fr;
+            }
+
+            .salary h2 {
+                font-size: 30px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="title">
+
+            <h1>AI Salary Prediction</h1>
+
+            <p>Estimated salary based on job market data</p>
+
+        </div>
+
+
+        <!-- SALARY -->
+
+        <div class="salary">
+
+    <p>AI Estimated Annual Salary</p>
+
+    <h2>
+        ₹{{ "{:,.0f}".format(predicted_salary) }}
+    </h2>
+
+    <p>
+        ₹{{ "{:,.0f}".format(monthly_salary) }} / month
+    </p>
+
+    <div class="range">
+
+        Expected Salary Range
+
+        <br>
+
+        <strong>
+            ₹{{ "{:,.0f}".format(lower_salary) }}
+            -
+            ₹{{ "{:,.0f}".format(upper_salary) }}
+        </strong>
+
+    </div>
+
+</div>
+
+
+        <!-- MONTHLY SALARY -->
+
+        <div class="detail">
+
+            <strong>Estimated Monthly Salary</strong>
+
+            ₹{{ "{:,.0f}".format(monthly_salary) }}
+
+            <br>
+
+            <small>
+                Range:
+                ₹{{ "{:,.0f}".format(lower_monthly) }}
+                -
+                ₹{{ "{:,.0f}".format(upper_monthly) }}
+            </small>
+
+        </div>
+
+
+        <!-- USER DETAILS -->
+
+        <div class="details">
+
+            <div class="detail">
+
+                <strong>Job Role</strong>
+
+                {{ job_role }}
+
+            </div>
+
+
+            <div class="detail">
+
+                <strong>Location</strong>
+
+                {{ location }}
+
+            </div>
+
+
+            <div class="detail">
+
+                <strong>Experience</strong>
+
+                {{ experience }} years
+
+            </div>
+
+
+            <div class="detail">
+
+                <strong>Skills</strong>
+
+                {{ skills }}
+
+            </div>
+
+        </div>
+
+
+        <!-- BUTTON -->
+         <div class="detail">
+
+    <strong>Model Performance</strong>
+
+    <p>R² Score: 66.43%</p>
+
+    <p>Typical prediction error: ₹2.55 Lakhs</p>
+
+    <small>
+        This prediction is an estimate based on historical job-market data.
+    </small>
+
+</div>
+
+        <div class="buttons">
+
+            <a href="/" class="button">
+                Predict Another Salary
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
