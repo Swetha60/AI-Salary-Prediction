@@ -1,5 +1,6 @@
 # AI Salary Prediction System
 **AI-powered salary prediction web application**
+
 <img width="1495" height="813" alt="Image" src="https://github.com/user-attachments/assets/2953275f-efc1-4326-8350-7fcaaff20764" />
 <img width="1447" height="832" alt="Image" src="https://github.com/user-attachments/assets/f371cc64-0a56-450f-b418-d0ddcb64fd07" />
 An AI-powered salary prediction web application that estimates salaries for job roles using real-world Indian job market data.
